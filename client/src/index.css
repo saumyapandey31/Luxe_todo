@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #F7F3EE;
+  --color-card: #FFFDF9;
+  --color-brown: #5B2D1D;
+  --color-brown-dark: #3B1F17;
+  --color-beige: #D9C3A7;
+  --color-cream: #F4EDE5;
+  --color-gold: #C8A165;
+  --color-ink: #2B2B2B;
+  --color-success: #3B7D5D;
+  --color-danger: #B94A48;
+
+  --font-serif: "Fraunces", "Georgia", serif;
+  --font-sans: "Inter", -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-serif);
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background-color: var(--color-gold);
+  color: #fff;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(91,45,29,0.18); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(91,45,29,0.32); }
+
+/* ---------- Reusable component classes ---------- */
+
+.luxe-card {
+  background: var(--color-card);
+  border: 1px solid rgba(91,45,29,0.08);
+  border-radius: 24px;
+  box-shadow: 0 1px 2px rgba(59,31,23,0.04), 0 12px 32px -16px rgba(59,31,23,0.12);
+}
+
+.luxe-card-hover {
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease;
+}
+.luxe-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px -20px rgba(59,31,23,0.28);
+  border-color: rgba(200,161,101,0.4);
+}
+
+.luxe-glass {
+  background: rgba(255,253,249,0.65);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+.luxe-btn-primary {
+  background: linear-gradient(135deg, #5B2D1D 0%, #3B1F17 100%);
+  color: #F4EDE5;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+  box-shadow: 0 10px 24px -10px rgba(91,45,29,0.55);
+}
+.luxe-btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 16px 30px -10px rgba(91,45,29,0.6);
+}
+.luxe-btn-primary:active { transform: translateY(0); }
+
+.luxe-btn-ghost {
+  background: transparent;
+  border: 1.5px solid rgba(91,45,29,0.18);
+  color: var(--color-brown);
+  border-radius: 999px;
+  transition: all .25s ease;
+}
+.luxe-btn-ghost:hover {
+  border-color: var(--color-brown);
+  background: rgba(91,45,29,0.04);
+}
+
+.luxe-input {
+  background: var(--color-card);
+  border: 1.5px solid rgba(91,45,29,0.12);
+  border-radius: 16px;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.luxe-input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 4px rgba(200,161,101,0.18);
+}
+
+.luxe-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(91,45,29,0.15), transparent);
+}
+
+.luxe-arch {
+  border-radius: 999px 999px 24px 24px;
+}
+
+.luxe-pill {
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.luxe-fade-in {
+  animation: luxeFadeIn .6s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes luxeFadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.luxe-skeleton {
+  background: linear-gradient(90deg, rgba(91,45,29,0.06) 25%, rgba(91,45,29,0.12) 37%, rgba(91,45,29,0.06) 63%);
+  background-size: 400% 100%;
+  animation: luxeShimmer 1.4s ease infinite;
+  border-radius: 16px;
+}
+@keyframes luxeShimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+.luxe-focus-ring:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
