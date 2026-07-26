@@ -1,0 +1,243 @@
+/*
+  luxe-premium.css
+  Additive styles only — nothing here overrides luxe-card, luxe-btn-primary,
+  luxe-btn-ghost, luxe-pill, luxe-input, luxe-arch, luxe-divider, luxe-fade-in,
+  or your existing color tokens (--color-bg, --color-cream, --color-beige,
+  --color-brown, --color-brown-dark, --color-gold, --color-ink, --color-success).
+  Import this file once, after your existing globals.
+*/
+
+/* ---------- Glass ---------- */
+.luxe-glass {
+  background: color-mix(in srgb, var(--color-bg, #fff) 55%, transparent);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid color-mix(in srgb, var(--color-brown, #5b2d1d) 12%, transparent);
+}
+.luxe-glass-dark {
+  background: color-mix(in srgb, var(--color-brown-dark, #3b2314) 60%, transparent);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- Gradient text ---------- */
+.luxe-gradient-text {
+  background: linear-gradient(100deg, var(--color-brown-dark, #3b2314) 10%, var(--color-gold, #c8a165) 45%, var(--color-brown, #5b2d1d) 80%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: luxe-gradient-shift 8s ease-in-out infinite;
+}
+@keyframes luxe-gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ---------- Animated gradient border (newsletter, CTA) ---------- */
+.luxe-gradient-border {
+  position: relative;
+  isolation: isolate;
+}
+.luxe-gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  z-index: -1;
+  background: conic-gradient(from var(--angle, 0deg), var(--color-gold, #c8a165), transparent 30%, var(--color-brown, #5b2d1d), transparent 70%, var(--color-gold, #c8a165));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: luxe-border-spin 6s linear infinite;
+}
+@property --angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes luxe-border-spin {
+  to { --angle: 360deg; }
+}
+
+/* ---------- Marquee ---------- */
+.luxe-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: luxe-marquee 32s linear infinite;
+}
+.luxe-marquee-track:hover {
+  animation-play-state: paused;
+}
+@keyframes luxe-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- Shimmer (loading skeleton) ---------- */
+.luxe-shimmer {
+  position: relative;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--color-beige, #e6d9c3) 60%, transparent);
+}
+.luxe-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  animation: luxe-shimmer-move 1.8s ease-in-out infinite;
+}
+@keyframes luxe-shimmer-move {
+  100% { transform: translateX(100%); }
+}
+
+/* ---------- Glow ---------- */
+.luxe-glow-hover {
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+.luxe-glow-hover:hover {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-gold, #c8a165) 40%, transparent), 0 20px 50px -12px color-mix(in srgb, var(--color-gold, #c8a165) 35%, transparent);
+  transform: translateY(-4px);
+}
+
+/* ---------- Spotlight card ---------- */
+.luxe-spotlight {
+  position: relative;
+  overflow: hidden;
+}
+.luxe-spotlight::before {
+  content: "";
+  position: absolute;
+  left: var(--mx, 50%);
+  top: var(--my, 50%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-gold, #c8a165) 22%, transparent) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.luxe-spotlight:hover::before {
+  opacity: 1;
+}
+
+/* ---------- Noise texture overlay ---------- */
+.luxe-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Kbd chip ---------- */
+.luxe-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: var(--color-bg, #fff);
+  border: 1px solid color-mix(in srgb, var(--color-brown, #5b2d1d) 18%, transparent);
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--color-brown, #5b2d1d) 14%, transparent);
+  color: var(--color-brown-dark, #3b2314);
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==================================================================== */
+/*  ATELIER SIGNATURE SYSTEM                                             */
+/*  Pattern-paper texture, brass pins, pinned swatch cards, stitched     */
+/*  thread rail, ledger leaders — the visual identity for the redesign.  */
+/* ==================================================================== */
+
+/* Subtle pattern-cutting paper grid — a literal atelier material,
+   used as a page-level texture instead of a flat background. */
+.luxe-pattern-paper {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--color-brown, #5b2d1d) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--color-brown, #5b2d1d) 6%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.luxe-pattern-paper-dark {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Brass pin / brad — sits at the corner of a pinned swatch card */
+.luxe-pin {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 30%, #f3dfa8, var(--color-gold, #c8a165) 55%, #8f6a35 100%);
+  box-shadow: 0 3px 6px rgba(59, 35, 20, 0.35), inset 0 -1px 1px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+}
+
+/* Pinned swatch card: slight rotation via --r, lifts flat on hover */
+.luxe-swatch {
+  transform: rotate(var(--r, -1.2deg));
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+}
+.luxe-swatch:hover {
+  transform: rotate(0deg) translateY(-6px);
+  box-shadow: 0 24px 48px -18px rgba(59, 35, 20, 0.35);
+}
+
+/* Oversized decorative quote glyph */
+.luxe-quote-glyph {
+  font-family: var(--font-display, serif);
+  line-height: 0.7;
+  color: var(--color-gold, #c8a165);
+  opacity: 0.35;
+}
+
+/* Ledger row: label ..... value, dotted leader like a spec sheet */
+.luxe-ledger-leader {
+  flex: 1;
+  border-bottom: 1.5px dotted color-mix(in srgb, var(--color-brown, #5b2d1d) 30%, transparent);
+  margin: 0 12px;
+  transform: translateY(-4px);
+}
+
+/* Ruler ticks — thin repeating stripes, used on small spec tags */
+.luxe-ruler {
+  height: 6px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-brown, #5b2d1d) 45%, transparent) 0px,
+    color-mix(in srgb, var(--color-brown, #5b2d1d) 45%, transparent) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+}
+
+/* Thread bead used on the scroll-progress rail */
+.luxe-thread-bead {
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 30%, #fff3d6, var(--color-gold, #c8a165) 60%, #8f6a35 100%);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-gold, #c8a165) 18%, transparent), 0 2px 6px rgba(59, 35, 20, 0.4);
+}
+

@@ -1,11 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import { AuthProvider } from "./hooks/useAuth";
+
 import ProtectedRoute from "./components/ProtectedRoute";
 import DashboardLayout from "./layouts/DashboardLayout";
 
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+
 import DashboardHome from "./pages/DashboardHome";
 import TasksPage from "./pages/TasksPage";
 import KanbanPage from "./pages/KanbanPage";
@@ -21,11 +24,14 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+
         <Routes>
+          {/* Public Pages */}
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
 
+          {/* Protected Dashboard */}
           <Route
             path="/dashboard"
             element={
@@ -46,8 +52,10 @@ export default function App() {
             <Route path="profile" element={<ProfilePage />} />
           </Route>
 
+          {/* 404 */}
           <Route path="*" element={<LandingPage />} />
         </Routes>
+
       </BrowserRouter>
     </AuthProvider>
   );

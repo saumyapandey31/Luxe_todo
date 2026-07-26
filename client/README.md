@@ -9,6 +9,11 @@ Currently, two official plugins are available:
 
 ## React Compiler
 
+## Install
+```
+npm install framer-motion lucide-react
+```
+
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
 ## Expanding the Oxlint configuration
